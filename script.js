@@ -54,24 +54,30 @@ function playRound(humanChoice, computerChoice) {
 
   if (humanChoice == 'rock') { // Rock
     if (computerChoice == 'paper') {
-      return 'Computer Wins';
+      computerScore++;
+      return `Computer Wins \n ${computerChoice} beats ${humanChoice}`;
     } else if (computerChoice == 'scissors') {
+      humanScore++;
       return `Player Wins \n ${humanChoice} beats ${computerChoice}`;
     } else {
       return `Draw \n Both players chose ${humanChoice}`;
     }
   } else if (humanChoice == 'paper') { // Paper
     if (computerChoice == 'rock') {
+      humanScore++;
       return `Player Wins \n ${humanChoice} beats ${computerChoice}`;
     } else if (computerChoice == 'scissors') {
+      computerScore++;
       return `Computer Wins \n ${computerChoice} beats ${humanChoice}`;
     } else {
       return `Draw \n Both players chose ${humanChoice}`;
     }
   } else { // Scissors
     if (computerChoice == 'rock') {
+      computerScore++;
       return `Computer Wins \n ${computerChoice} beats ${humanChoice}`;
     } else if (computerChoice == 'paper') {
+      humanScore++;
       return `Player Wins \n ${humanChoice} beats ${computerChoice}`;
     } else {
       return `Draw \n Both players chose ${humanChoice}`;
@@ -82,7 +88,7 @@ function playRound(humanChoice, computerChoice) {
 // Runs the algo and logs the result.
 function playGame() {
   const result = playRound(getHumanChoice(), getComputerChoice());
-  console.log(result)
+  console.log(`${result} \n Current Score: \n Player: ${humanScore} | Computer: ${computerScore}`);
 };
 
 playGame();
