@@ -4,8 +4,7 @@
 
 // Computer generates 1 of 3 choices: Rock, Paper, Scissors.
 //  The computer will pick 1 of these choices at random.
-//   Then the computer will output their choice onto the console.
-
+//   Returns the choice made for future use.
 function getComputerChoice() {
 
   const chance = Math.random();
@@ -17,7 +16,31 @@ function getComputerChoice() {
   } else {
     return 'scissors';
   }
-
 };
 
-console.log(getComputerChoice());
+// A prompt will ask for a players choice
+//  The player must provide a choice between Rock, Paper, Scissors.
+//   If a choice is given outside of the scope, an error is provided.
+//    The console will provide feedback to the player by logging the input.
+
+function getHumanChoice() {
+  let humanChoice;
+  try {
+    humanChoice = prompt('Rock, Paper, or Scissors?');
+    if (
+      humanChoice.toLowerCase() == "rock" ||
+      humanChoice.toLowerCase() == "paper" ||
+      humanChoice.toLowerCase() == "scissors"
+    ) {
+      return humanChoice.toLowerCase();
+    } else {
+      throw new TypeError(`"${humanChoice}" is an Invalid Argument`);
+    }
+  } catch (error) {
+    console.error(error)
+    return 'invalid'
+  }
+};
+
+console.log(`Computer: ${getComputerChoice()}`);
+console.log(`Player: ${getHumanChoice()}`);
