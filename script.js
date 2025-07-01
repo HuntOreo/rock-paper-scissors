@@ -85,7 +85,8 @@ function playRound(humanChoice, computerChoice) {
   }
 }
 
-// Runs the algo and logs the result.
+// Will play 5 rounds in total.
+//  On the 5th round, it will log the total score and declare a winner.
 function playGame() {
   const humanChoice = getHumanChoice();
   const computerChoice = getComputerChoice();
