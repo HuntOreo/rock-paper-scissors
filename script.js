@@ -31,12 +31,13 @@ function getHumanChoice() {
   let humanChoice;
   try {
     humanChoice = prompt('Rock, Paper, or Scissors?');
+    humanChoiceFormatted = humanChoice.toLowerCase()
     if (
-      humanChoice.toLowerCase() == "rock" ||
-      humanChoice.toLowerCase() == "paper" ||
-      humanChoice.toLowerCase() == "scissors"
+      humanChoiceFormatted == "rock" ||
+      humanChoiceFormatted == "paper" ||
+      humanChoiceFormatted == "scissors"
     ) {
-      return humanChoice.toLowerCase();
+      return humanChoiceFormatted;
     } else {
       throw new TypeError(`"${humanChoice}" is an Invalid Argument`);
     }
