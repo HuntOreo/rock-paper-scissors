@@ -87,7 +87,10 @@ function playRound(humanChoice, computerChoice) {
 
 // Runs the algo and logs the result.
 function playGame() {
-  const result = playRound(getHumanChoice(), getComputerChoice());
+  const humanChoice = getHumanChoice();
+  const computerChoice = getComputerChoice();
+  const result = playRound(humanChoice, computerChoice);
+
   console.log(`${result} \n Current Score: \n Player: ${humanScore} | Computer: ${computerScore}`);
 };
 
