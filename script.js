@@ -51,8 +51,32 @@ function getHumanChoice() {
 //   If there is no victor, declare a draw.
 //    Ask the player if they wish to go again.
 function playRound(humanChoice, computerChoice) {
-  console.log(`player: ${humanChoice}`);
-  console.log(`computer: ${computerChoice}`);
+
+  if (humanChoice == 'rock') { // Rock
+    if (computerChoice == 'paper') {
+      return 'Computer Wins';
+    } else if (computerChoice == 'scissors') {
+      return `Player Wins \n ${humanChoice} beats ${computerChoice}`;
+    } else {
+      return `Draw \n Both players chose ${humanChoice}`;
+    }
+  } else if (humanChoice == 'paper') { // Paper
+    if (computerChoice == 'rock') {
+      return `Player Wins \n ${humanChoice} beats ${computerChoice}`;
+    } else if (computerChoice == 'scissors') {
+      return `Computer Wins \n ${computerChoice} beats ${humanChoice}`;
+    } else {
+      return `Draw \n Both players chose ${humanChoice}`;
+    }
+  } else { // Scissors
+    if (computerChoice == 'rock') {
+      return `Computer Wins \n ${computerChoice} beats ${humanChoice}`;
+    } else if (computerChoice == 'paper') {
+      return `Player Wins \n ${humanChoice} beats ${computerChoice}`;
+    } else {
+      return `Draw \n Both players chose ${humanChoice}`;
+    }
+  }
 }
 
-playRound(getHumanChoice(), getComputerChoice());
+console.log(playRound(getHumanChoice(), getComputerChoice()));
