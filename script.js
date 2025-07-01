@@ -79,4 +79,10 @@ function playRound(humanChoice, computerChoice) {
   }
 }
 
-console.log(playRound(getHumanChoice(), getComputerChoice()));
+// Runs the algo and logs the result.
+function playGame() {
+  const result = playRound(getHumanChoice(), getComputerChoice());
+  console.log(result)
+};
+
+playGame();
