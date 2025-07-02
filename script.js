@@ -31,7 +31,7 @@ function getHumanChoice() {
   let humanChoice;
   try {
     humanChoice = prompt('Rock, Paper, or Scissors?');
-    humanChoiceFormatted = humanChoice.toLowerCase()
+    const humanChoiceFormatted = humanChoice.toLowerCase()
     if (
       humanChoiceFormatted == "rock" ||
       humanChoiceFormatted == "paper" ||
@@ -89,11 +89,41 @@ function playRound(humanChoice, computerChoice) {
 // Will play 5 rounds in total.
 //  On the 5th round, it will log the total score and declare a winner.
 function playGame() {
-  const humanChoice = getHumanChoice();
-  const computerChoice = getComputerChoice();
-  const result = playRound(humanChoice, computerChoice);
+  let round = 1;
 
-  console.log(`${result} \n Current Score: \n Player: ${humanScore} | Computer: ${computerScore}`);
+  // Reset score.
+  humanScore = 0;
+  computerScore = 0;
+
+  while (round <= 5) {
+
+    const humanChoice = getHumanChoice();
+    const computerChoice = getComputerChoice();
+    const result = playRound(humanChoice, computerChoice);
+
+    console.log(`${result} \n Current Score: \n Player: ${humanScore} | Computer: ${computerScore}`);
+    round++;
+  }
+
+  if (humanScore > computerScore) {
+    const replayBool = confirm(`You Win!!! \n total score: \n Player: ${humanScore} | Computer: ${computerScore} \n Play again?`);
+
+    if (replayBool) {
+      playGame();
+    }
+  } else if (computerScore > humanScore) {
+    const replayBool = confirm(`Computer Wins... \n total score: \n Player: ${humanScore} | Computer: ${computerScore} \n Play again?`);
+
+    if (replayBool) {
+      playGame();
+    }
+  } else {
+    const replayBool = confirm(`Draw! \n total score: \n Player: ${humanScore} | Computer: ${computerScore} \n Play again?`);
+
+    if (replayBool) {
+      playGame();
+    }
+  }
 };
 
 playGame();
