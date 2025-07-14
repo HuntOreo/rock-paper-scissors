@@ -102,7 +102,9 @@ function renderVictor(playerScore, computerScore) {
     `;
   }
 
-  victorElm.classList.toggle('hide');
+  if (victorElm.classList.contains('hide')) {
+    victorElm.classList.toggle('hide');
+  }
 };
 
 function playGame(playerChoice) {
