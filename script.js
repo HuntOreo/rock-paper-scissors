@@ -24,7 +24,7 @@ function getComputerChoice() {
   }
 };
 
-function playRound(playerChoice, computerChoice) {
+function getResult(playerChoice, computerChoice) {
   if (playerChoice == '🪨') {
     if (computerChoice == '🪨') {
       return declareDraw(playerChoice);
@@ -68,7 +68,7 @@ function playGame(playerChoice) {
   computerScore = 0;
 
   const computerChoice = getComputerChoice();
-  const result = playRound(playerChoice, computerChoice);
+  const result = getResult(playerChoice, computerChoice);
 
   if (resultElm.parentElement.classList.contains('reveal')) {
     resultElm.parentElement.classList.toggle('reveal');
