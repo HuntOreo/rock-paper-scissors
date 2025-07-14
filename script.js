@@ -1,15 +1,20 @@
 let playerScore = 0;
 let computerScore = 0;
+let round = 0;
 
 const btns = document.querySelectorAll('button');
 const resultElm = document.querySelector('.result');
+const headerElm = document.querySelector('h1');
+const roundElm = document.querySelector('.round');
+const victorElm = document.querySelector('.victor');
+
 btns.forEach(elem => {
   elem.addEventListener('click', (event) => {
     const elem = event.target;
     const choice = elem.innerText;
     playGame(choice);
   });
-})
+});
 
 // Computer generates 1 of 3 choices: Rock, Paper, Scissors.
 function getComputerChoice() {
@@ -60,36 +65,65 @@ function getResult(playerChoice, computerChoice) {
       return declareDraw(playerChoice);
     }
   }
-}
-
-function playGame(playerChoice) {
-  // Reset score.
-  playerScore = 0;
-  computerScore = 0;
-
-  const computerChoice = getComputerChoice();
-  const result = getResult(playerChoice, computerChoice);
-
-  if (resultElm.parentElement.classList.contains('reveal')) {
-    resultElm.parentElement.classList.toggle('reveal');
-  }
-  resultElm.innerText = `
-    ${result}
-    Current Score:
-    Player: ${playerScore} | Computer: ${computerScore}
-  `;
 };
 
 function declareComputerWins(playerChoice, computerChoice) {
   computerScore++;
   return `Computer Wins \n ${computerChoice} beats ${playerChoice}`;
-}
+};
 
 function declarePlayerWins(playerChoice, computerChoice) {
   playerScore++;
   return `Player Wins \n ${playerChoice} beats ${computerChoice}`;
-}
+};
 
 function declareDraw(playerChoice) {
   return `Draw \n Both players chose ${playerChoice}`;
-}
+};
+
+function renderVictor(playerScore, computerScore) {
+  if (playerScore > computerScore) {
+    victorElm.textContent = `
+      Player Won!
+      Final Score:
+      Player: ${playerScore} | Computer: ${computerScore}
+    `;
+  } else if (computerScore > playerScore) {
+    victorElm.textContent = `
+      Computer Won!
+      Final Score:
+      Player: ${playerScore} | Computer: ${computerScore}
+    `;
+  } else {
+    victorElm.textContent = `
+      Draw!
+      Final Score:
+      Player: ${playerScore} | Computer: ${computerScore}
+    `;
+  }
+
+  victorElm.classList.toggle('hide');
+};
+
+function playGame(playerChoice) {
+  round++
+  roundElm.textContent = `Round: ${round}`;
+
+  const computerChoice = getComputerChoice();
+  const result = getResult(playerChoice, computerChoice);
+
+  if (resultElm.parentElement.classList.contains('hide')) {
+    resultElm.parentElement.classList.toggle('hide');
+  }
+
+  resultElm.innerText = result;
+
+  if (round === 5) {
+    renderVictor(playerScore, computerScore);
+
+    // Reset score and round
+    round = 0;
+    playerScore = 0;
+    computerScore = 0;
+  }
+};

@@ -20,6 +20,15 @@
         text-align: center;
       }
 
+      .victor {
+        text-align: center;
+      }
+
+      .round {
+        text-align: center;
+        font-size: 20px;
+      }
+
       button {
         font-size: 36px;
         background-color: coral;
@@ -53,7 +62,7 @@
         display: flex;
       }
 
-      .reveal {
+      .hide {
         display: none;
       }
     </style>
@@ -62,13 +71,17 @@
   <body>
     <h1>Rock Paper Scissors</h1>
 
+    <h2 class="victor hide"></h2>
+
+    <p class="round">Round: 0</p>
+
     <div class="container">
       <button>🪨</button>
       <button>📄</button>
       <button>✂️</button>
     </div>
 
-    <div class="wrapper reveal">
+    <div class="wrapper hide">
       <div class="result"></div>
     </div>
 
