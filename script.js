@@ -1,6 +1,16 @@
 let playerScore = 0;
 let computerScore = 0;
 
+const btns = document.querySelectorAll('button');
+const resultElm = document.querySelector('.result');
+btns.forEach(elem => {
+  elem.addEventListener('click', (event) => {
+    const elem = event.target;
+    const choice = elem.innerText;
+    playGame(choice);
+  });
+})
+
 // Computer generates 1 of 3 choices: Rock, Paper, Scissors.
 function getComputerChoice() {
   const chance = Math.random();
@@ -60,11 +70,14 @@ function playGame(playerChoice) {
   const computerChoice = getComputerChoice();
   const result = playRound(playerChoice, computerChoice);
 
-  console.log(`
-    ${result} \n Current Score: \n 
-    Player: ${playerScore} | 
-    Computer: ${computerScore}`
-  );
+  if (resultElm.parentElement.classList.contains('reveal')) {
+    resultElm.parentElement.classList.toggle('reveal');
+  }
+  resultElm.innerText = `
+    ${result}
+    Current Score:
+    Player: ${playerScore} | Computer: ${computerScore}
+  `;
 };
 
 function declareComputerWins(playerChoice, computerChoice) {
@@ -80,12 +93,3 @@ function declarePlayerWins(playerChoice, computerChoice) {
 function declareDraw(playerChoice) {
   return `Draw \n Both players chose ${playerChoice}`;
 }
-
-const btns = document.querySelectorAll('button');
-btns.forEach(elem => {
-  elem.addEventListener('click', (event) => {
-    const elem = event.target;
-    const choice = elem.innerText;
-    playGame(choice);
-  });
-})
