@@ -1,7 +1,7 @@
 
 
 // Global variables.
-let humanScore = 0;
+let playerScore = 0;
 let computerScore = 0;
 
 // Computer generates 1 of 3 choices: Rock, Paper, Scissors.
@@ -45,25 +45,43 @@ function getPlayerChoice(playerChoice) {
 }
 
 
-function playRound(humanChoice, computerChoice) {
+function playRound(playerChoice, computerChoice) {
 
-  if (humanChoice === '🪨') {
-    if (computerChoice === '🪨') { }
-    if (computerChoice === '🪨') { }
-    if (computerChoice === '🪨') { }
+  if (playerChoice === '🪨') {
+    if (computerChoice === '🪨') {
+      declareDraw(playerChoice);
+    }
+    if (computerChoice === '📄') {
+      declareComputerWins(playerChoice, computerChoice);
+    }
+    if (computerChoice === '✂️') {
+      declarePlayerWins(playerChoice, computerChoice);
+    }
   }
 
-  else if (humanChoice === '📄') {
-    if (computerChoice === '🪨') { }
-    if (computerChoice === '🪨') { }
-    if (computerChoice === '🪨') { }
+  else if (playerChoice === '📄') {
+    if (computerChoice === '🪨') {
+      declarePlayerWins(playerChoice, computerChoice);
+    }
+    if (computerChoice === '📄') {
+      declareDraw(playerChoice);
+    }
+    if (computerChoice === '✂️') {
+      declareComputerWins(playerChoice, computerChoice);
+    }
 
   }
 
-  else if (humanChoice === '✂️') {
-    if (computerChoice === '🪨') { }
-    if (computerChoice === '🪨') { }
-    if (computerChoice === '🪨') { }
+  else if (playerChoice === '✂️') {
+    if (computerChoice === '🪨') {
+      declareComputerWins(playerChoice, computerChoice);
+    }
+    if (computerChoice === '📄') {
+      declarePlayerWins(playerChoice, computerChoice);
+    }
+    if (computerChoice === '✂️') {
+      declareDraw(playerChoice);
+    }
 
   }
 
@@ -106,7 +124,7 @@ function playGame(playerChoice) {
   let round = 1;
 
   // Reset score.
-  humanScore = 0;
+  playerScore = 0;
   computerScore = 0;
 
   const humanChoice = getPlayerChoice(playerChoice);
@@ -115,15 +133,15 @@ function playGame(playerChoice) {
 
   console.log(`
     ${result} \n Current Score: \n 
-    Player: ${humanScore} | 
+    Player: ${playerScore} | 
     Computer: ${computerScore}`
   );
 
-  if (humanScore > computerScore) {
+  if (playerScore > computerScore) {
     const replayBool = confirm(`
       You Win!!! \n 
       total score: \n 
-      Player: ${humanScore} | 
+      Player: ${playerScore} | 
       Computer: ${computerScore} \n 
       Play again?`
     );
@@ -131,7 +149,7 @@ function playGame(playerChoice) {
     if (replayBool) {
       playGame();
     }
-  } else if (computerScore > humanScore) {
+  } else if (computerScore > playerScore) {
     const replayBool = confirm(`
       Computer Wins... \n 
       total score: \n 
@@ -146,7 +164,7 @@ function playGame(playerChoice) {
   } else {
     const replayBool = confirm(`Draw! \n 
       total score: \n 
-      Player: ${humanScore} | 
+      Player: ${playerScore} | 
       Computer: ${computerScore} \n 
       Play again?`
     );
@@ -157,16 +175,18 @@ function playGame(playerChoice) {
   }
 };
 
-function declareComputerWins(computerChoice, playerChoice) {
-
+function declareComputerWins(playerChoice, computerChoice) {
+  computerScore++;
+  return `Computer Wins \n ${computerChoice} beats ${playerChoice}`;
 }
 
 function declarePlayerWins(playerChoice, computerChoice) {
-
+  playerScore++;
+  return `Player Wins \n ${playerChoice} beats ${computerChoice}`;
 }
 
-function declareDraw(playerChoice, computerChoice) {
-
+function declareDraw(playerChoice) {
+  return `Draw \n Both players chose ${playerChoice}`;
 }
 
 const btns = document.querySelectorAll('button');
