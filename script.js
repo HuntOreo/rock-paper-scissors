@@ -11,7 +11,6 @@ let computerScore = 0;
 //  The computer will pick 1 of these choices at random.
 //   Returns the choice made for future use.
 function getComputerChoice() {
-
   const chance = Math.random();
 
   if (chance >= 0.66) {
@@ -27,25 +26,30 @@ function getComputerChoice() {
 //  The player must provide a choice between Rock, Paper, Scissors.
 //   If a choice is given outside of the scope, an error is provided.
 //    The console will provide feedback to the player by logging the input.
-function getHumanChoice() {
-  let humanChoice;
-  try {
-    humanChoice = prompt('Rock, Paper, or Scissors?');
-    const humanChoiceFormatted = humanChoice.toLowerCase()
-    if (
-      humanChoiceFormatted == "rock" ||
-      humanChoiceFormatted == "paper" ||
-      humanChoiceFormatted == "scissors"
-    ) {
-      return humanChoiceFormatted;
-    } else {
-      throw new TypeError(`"${humanChoice}" is an Invalid Argument`);
+function getPlayerChoice(playerChoice) {
+
+  if (typeof (playerChoice) === undefined) {
+    let humanChoiceInput;
+    try {
+      humanChoiceInput = prompt('Rock, Paper, or Scissors?');
+      const humanChoiceFormatted = humanChoiceInput.toLowerCase()
+      if (
+        humanChoiceFormatted == "rock" ||
+        humanChoiceFormatted == "paper" ||
+        humanChoiceFormatted == "scissors"
+      ) {
+        return humanChoiceFormatted;
+      } else {
+        throw new TypeError(`"${humanChoiceInput}" is an Invalid Argument`);
+      }
+    } catch (error) {
+      console.error(error);
+      return 'invalid';
     }
-  } catch (error) {
-    console.error(error);
-    return 'invalid';
+  } else {
+    console.log('test');
   }
-};
+}
 
 // Receive the player and computer choices.
 //  Compare the choices and determine who is a victor.
@@ -88,42 +92,63 @@ function playRound(humanChoice, computerChoice) {
 
 // Will play 5 rounds in total.
 //  On the 5th round, it will log the total score and declare a winner.
-function playGame() {
+function playGame(playerChoice) {
   let round = 1;
 
   // Reset score.
   humanScore = 0;
   computerScore = 0;
 
-  while (round <= 5) {
+  const humanChoice = getPlayerChoice(playerChoice);
+  const computerChoice = getComputerChoice();
+  const result = playRound(humanChoice, computerChoice);
 
-    const humanChoice = getHumanChoice();
-    const computerChoice = getComputerChoice();
-    const result = playRound(humanChoice, computerChoice);
-
-    console.log(`${result} \n Current Score: \n Player: ${humanScore} | Computer: ${computerScore}`);
-    round++;
-  }
+  console.log(`
+    ${result} \n Current Score: \n 
+    Player: ${humanScore} | 
+    Computer: ${computerScore}`
+  );
 
   if (humanScore > computerScore) {
-    const replayBool = confirm(`You Win!!! \n total score: \n Player: ${humanScore} | Computer: ${computerScore} \n Play again?`);
+    const replayBool = confirm(`
+      You Win!!! \n 
+      total score: \n 
+      Player: ${humanScore} | 
+      Computer: ${computerScore} \n 
+      Play again?`
+    );
 
     if (replayBool) {
       playGame();
     }
   } else if (computerScore > humanScore) {
-    const replayBool = confirm(`Computer Wins... \n total score: \n Player: ${humanScore} | Computer: ${computerScore} \n Play again?`);
+    const replayBool = confirm(`
+      Computer Wins... \n 
+      total score: \n 
+      Player: ${humanScore} | 
+      Computer: ${computerScore} \n 
+      Play again?`
+    );
 
-    if (replayBool) {
-      playGame();
-    }
+    // if (replayBool) {
+    //   playGame();
+    // }
   } else {
-    const replayBool = confirm(`Draw! \n total score: \n Player: ${humanScore} | Computer: ${computerScore} \n Play again?`);
+    const replayBool = confirm(`Draw! \n 
+      total score: \n 
+      Player: ${humanScore} | 
+      Computer: ${computerScore} \n 
+      Play again?`
+    );
 
-    if (replayBool) {
-      playGame();
-    }
+    // if (replayBool) {
+    //   playGame();
+    // }
   }
 };
 
-playGame();
+const btns = document.querySelectorAll('button');
+btns.forEach(elem => {
+  elem.addEventListener('click', playGame(elem.innerText))
+})
+// playGame();

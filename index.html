@@ -4,10 +4,44 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./style.css">
     <title>Rock Paper Scissors</title>
+
+    <style>
+      html {
+        height: 100%;
+      }
+
+      body {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      button {
+        font-size: 36px;
+        background-color: coral;
+        border: none;
+        border-radius: 20px;
+        padding: 20px;
+      }
+
+      .container {
+        margin: auto;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+      }
+    </style>
   </head>
 
   <body>
     <h1>Rock Paper Scissors</h1>
+
+    <div class="container">
+      <button>🪨</button>
+      <button>📄</button>
+      <button>✂️</button>
+    </div>
 
     <script src="./script.js"></script>
   </body>
