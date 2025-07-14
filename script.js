@@ -83,19 +83,19 @@ function declareDraw(playerChoice) {
 
 function renderVictor(playerScore, computerScore) {
   if (playerScore > computerScore) {
-    victorElm.textContent = `
+    victorElm.innerText = `
       Player Won!
       Final Score:
       Player: ${playerScore} | Computer: ${computerScore}
     `;
   } else if (computerScore > playerScore) {
-    victorElm.textContent = `
+    victorElm.innerText = `
       Computer Won!
       Final Score:
       Player: ${playerScore} | Computer: ${computerScore}
     `;
   } else {
-    victorElm.textContent = `
+    victorElm.innerText = `
       Draw!
       Final Score:
       Player: ${playerScore} | Computer: ${computerScore}
@@ -109,7 +109,7 @@ function renderVictor(playerScore, computerScore) {
 
 function playGame(playerChoice) {
   round++
-  roundElm.textContent = `Round: ${round}`;
+  roundElm.innerText = `Round: ${round}`;
 
   const computerChoice = getComputerChoice();
   const result = getResult(playerChoice, computerChoice);
